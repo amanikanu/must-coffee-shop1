@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kettle &amp; Cherry Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--white:#fff;--milk:#f6efe6;--latte:#e6d5c0;--caramel:#b07a4a;--mocha:#6f4e37;--espresso:#3b2315;--ink:#2b1810;--muted:#6b5546;--line:rgba(59,35,21,.16);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--white);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:18px;line-height:1.55;overflow-x:hidden}
+header{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 5vw 14px;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-size:1.2rem;letter-spacing:-.02em;color:var(--espresso);text-decoration:none}
+nav a{color:var(--ink);text-decoration:none;margin-left:24px;font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--caramel)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--caramel);outline-offset:3px}
+main{position:relative;z-index:2}
+section{padding:110px 5vw 90px}
+.tr{min-height:100vh;display:flex;align-items:center}
+.col{width:min(46%,560px)}
+.right{justify-content:flex-end}
+.solid{background:var(--white)}.milk{background:var(--milk)}.dark{background:var(--espresso);color:var(--milk)}
+h1{font-size:clamp(2.9rem,7vw,6.4rem);line-height:.94;letter-spacing:-.045em;font-weight:800;margin:0 0 24px;color:var(--espresso)}
+h2{font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1;letter-spacing:-.035em;font-weight:700;margin:0 0 20px;color:var(--espresso)}
+.dark h2,.dark h3{color:var(--milk)}
+h3{font-size:1.25rem;margin:0 0 6px;letter-spacing:-.01em}
+p{margin:0 0 20px;max-width:48ch;color:var(--muted)}
+.dark p{color:var(--latte)}
+.lede{font-size:1.2rem;color:var(--ink)}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;border:2px solid var(--espresso);color:var(--espresso);background:transparent;transition:transform .2s,background .2s}
+.btn.main{background:var(--espresso);color:var(--milk)}
+.btn:hover{transform:translateY(-2px)}
+.stats{display:flex;gap:34px;margin-top:38px;flex-wrap:wrap}
+.stats b{display:block;font-size:2rem;letter-spacing:-.03em;color:var(--mocha)}
+.stats span{font-size:.9rem;color:var(--muted)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:26px;padding:30px}
+.tabs,.roasts{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.tabs button,.roasts button{padding:9px 20px;border-radius:999px;border:2px solid var(--espresso);background:transparent;color:var(--espresso);font:inherit;font-weight:600;cursor:pointer}
+.tabs button[aria-pressed="true"],.roasts button[aria-pressed="true"]{background:var(--espresso);color:var(--milk)}
+.menu{list-style:none;margin:0;padding:0}
+.menu li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.menu li:last-child{border:0}
+.menu b{font-weight:600}.menu small{display:block;color:var(--muted);font-size:.85rem}
+.menu span{font-weight:700;color:var(--caramel)}
+#notes{min-height:3.2em}
+.points{list-style:none;margin:0;padding:0}
+.points li{padding:14px 0;border-top:1px solid var(--line)}
+.points b{display:block;color:var(--espresso)}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:36px}
+.wrap{max-width:1180px;margin:0 auto;width:100%}.two{align-items:center}
+.bar{background:var(--milk);border-radius:28px;padding:34px}.bar h3{margin-bottom:14px}.bar .row{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--line)}.bar .row span{color:var(--caramel);font-weight:700}.bar small{color:var(--muted)}
+.viewer{background:var(--latte);border-radius:28px;padding:18px;position:relative}
+.viewer canvas{width:100%;height:min(46vh,420px);display:block;touch-action:pan-y;cursor:grab;border-radius:20px}
+.viewer canvas:active{cursor:grabbing}
+.vbar{padding:12px 8px 4px}.vbar .tabs{margin-bottom:10px}.vbar p{margin:0;font-size:.95rem;color:var(--ink)}
+.hint{position:absolute;top:30px;left:34px;color:var(--mocha);font-size:.85rem}
+.swatch{height:14px;border-radius:99px;background:#6b4226;transition:background .3s;margin:6px 0 18px}
+.origin{background:var(--white);border-radius:24px;padding:28px}
+.origin i{display:inline-block;width:46px;height:46px;border-radius:50%;margin-bottom:16px}
+.origin small{display:block;color:var(--muted);margin-top:10px}
+.step{border-top:2px solid var(--caramel);padding-top:18px}
+.step em{font-style:normal;font-weight:800;font-size:2.4rem;color:var(--caramel);letter-spacing:-.04em}
+blockquote{margin:0;padding:28px;border-radius:24px;background:var(--milk);font-size:1.08rem;color:var(--ink)}
+blockquote cite{display:block;margin-top:14px;font-style:normal;font-weight:600;color:var(--mocha);font-size:.95rem}
+.plan{background:var(--white);border-radius:26px;padding:32px;display:flex;flex-direction:column}
+.plan.pick{background:var(--espresso);color:var(--milk)}
+.plan.pick h3{color:var(--milk)}.plan.pick p{color:var(--latte)}
+.plan .price{font-size:2.6rem;font-weight:800;letter-spacing:-.04em;margin:6px 0 12px}
+.plan .btn{margin-top:auto;text-align:center}
+.plan.pick .btn{background:var(--milk);border-color:var(--milk);color:var(--espresso)}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;margin:0 0 22px}
+.hours dt{font-weight:600}.hours dd{margin:0;color:var(--muted)}
+.news{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.news input{flex:1;min-width:200px;padding:14px 20px;border-radius:999px;border:2px solid var(--latte);font:inherit;background:var(--white);color:var(--ink)}
+.two{display:grid;gap:50px;grid-template-columns:1fr 1fr}
+footer{position:relative;z-index:2;background:var(--ink);color:var(--latte);padding:34px 5vw calc(40px + env(safe-area-inset-bottom,0px));font-size:.9rem}
+@media (max-width:800px){
+ .col{width:100%}.right{justify-content:flex-start}.two{grid-template-columns:1fr}
+ nav a:not(:last-child){display:none}
+ #hero{align-items:flex-start;padding-top:110px}
+ .col.card{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+/* Premium layer: a restrained editorial system built on top of the original interactions. */
+:root{--paper:#f7f3ee;--paper-2:#eee6dc;--espresso:#21140e;--ink:#291a13;--muted:#75675e;--caramel:#c47742;--accent:#e8a06a;--line:rgba(41,26,19,.14)}
+body{background:var(--paper);font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);letter-spacing:-.01em}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;z-index:10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E")}
+header{padding:18px 5vw;background:rgba(247,243,238,.86);border-bottom:1px solid rgba(41,26,19,.09)}
+.brand{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.04em}.brand:before{content:'✦';font-family:system-ui;font-size:.7rem;color:var(--caramel);vertical-align:middle;margin-right:8px}
+nav a{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted);transition:color .2s}nav a:hover{color:var(--caramel)}
+section{padding:128px 5vw 112px}.tr{min-height:100svh;padding-top:150px;background:radial-gradient(circle at 82% 48%,rgba(232,160,106,.24),transparent 24rem),var(--paper)}
+.wrap{max-width:1240px}.two{gap:80px}h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:500;color:var(--espresso)}h1{font-size:clamp(3.8rem,8vw,7.7rem);line-height:.88;letter-spacing:-.07em;max-width:7ch}h2{font-size:clamp(2.6rem,5vw,4.7rem);letter-spacing:-.065em}h3{font-weight:700}p{color:var(--muted);line-height:1.65}.lede{font-size:1.15rem;line-height:1.5;max-width:42ch}.btn{border:1px solid var(--espresso);border-radius:4px;padding:15px 23px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}.btn.main{background:var(--caramel);border-color:var(--caramel);color:#fff}.btn:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(111,78,55,.18)}
+.stats{gap:30px;margin-top:54px}.stats b{font-family:'Fraunces',serif;color:var(--espresso);font-size:2.2rem}.stats span{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;line-height:1.3;display:block;max-width:10ch}
+.viewer{background:linear-gradient(145deg,#e6d2bd,#c7956b);border-radius:4px;padding:14px;box-shadow:24px 28px 70px rgba(80,42,19,.18);transform:rotate(1deg)}.viewer canvas{height:min(54vh,500px);border-radius:2px}.hint{top:28px;left:auto;right:28px;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em}.vbar{background:rgba(247,243,238,.78);margin:0 -2px -2px;padding:18px 14px 10px}.tabs button,.roasts button{border:1px solid var(--espresso);border-radius:3px;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}.tabs button[aria-pressed="true"],.roasts button[aria-pressed="true"]{background:var(--espresso)}
+.solid{background:var(--paper)}.milk{background:var(--paper-2)}.dark{background:var(--espresso)}.card,.origin,.plan{border-radius:4px;box-shadow:0 18px 45px rgba(51,30,18,.05);border:1px solid rgba(41,26,19,.1)}.card{background:rgba(255,255,255,.7)}.origin{background:var(--paper)}.origin i{border-radius:2px}.menu li{padding:17px 0}.menu span{color:var(--caramel);font-weight:700}.points li{padding:20px 0}.points b{font-size:1.05rem;margin-bottom:4px}.grid{gap:18px}.step{border-top:1px solid var(--accent)}.step em{font-family:'Fraunces',serif;font-weight:500}.plan{padding:34px}.plan.pick{background:var(--espresso);box-shadow:0 20px 40px rgba(33,20,14,.22)}blockquote{border-radius:4px;background:var(--paper-2);border-left:3px solid var(--caramel)}
+.swatch{border-radius:2px;height:16px}.news input{border-radius:4px;border:1px solid var(--latte);font-size:.9rem}.hours{line-height:1.9}footer{background:var(--espresso);padding-top:46px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:800px){section{padding:92px 6vw}.tr{padding-top:122px}.two{gap:42px}h1{font-size:clamp(3.5rem,17vw,6rem)}nav a{display:none!important}.viewer{margin-top:18px}.stats{margin-top:34px;gap:22px}}
+</style>
+</head>
+<body>
+<header>
+ <a class="brand" href="#hero">Kettle &amp; Cherry</a>
+ <nav><a href="#story">Story</a><a href="#menu">Menu</a><a href="#origins">Origins</a><a href="#club">Bean club</a><a href="#visit">Visit</a></nav>
+</header>
+<main>
+<section id="hero" class="tr"><div class="wrap two">
+  <div>
+   <p style="font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--caramel);font-weight:700;margin-bottom:22px">Specialty coffee · Since 2019</p>
+   <h1>Rich coffee. Silky milk. Slow mornings.</h1>
+   <p class="lede">We roast small batches in house and pour every cup by hand. Stop by the bar or take a bag home.</p>
+   <div class="btns"><a class="btn main" href="#menu">See the menu</a><a class="btn" href="#club">Join the bean club</a></div>
+   <div class="stats"><div><b>12 kg</b><span>per roasting batch</span></div><div><b>6</b><span>farms we buy from</span></div><div><b>4.9</b><span>from 1,200 reviews</span></div></div>
+   <p style="margin-top:44px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">↓ Scroll to explore the bar</p>
+  </div>
+  <div class="viewer">
+   <canvas id="cup" role="img" aria-label="Interactive 3D coffee cup. Drag to turn it."></canvas>
+   <span class="hint">Drag to turn the cup</span>
+   <div class="vbar">
+    <div class="tabs" id="drinks" role="group" aria-label="Choose a drink">
+     <button data-d="flat" aria-pressed="true">Flat white</button><button data-d="espresso" aria-pressed="false">Espresso</button><button data-d="cap" aria-pressed="false">Cappuccino</button><button data-d="black" aria-pressed="false">Black</button>
+    </div>
+    <p id="dnote" aria-live="polite"></p>
+   </div>
+  </div>
+ </div></section>
+ <section id="story" class="solid"><div class="wrap two">
+  <div>
+   <h2>Built around one good cup</h2>
+   <p>Kettle &amp; Cherry started in 2019 as a cart with one grinder. Today we run a roastery and a bar, and we still taste every batch before it ships.</p>
+  </div>
+  <ul class="points">
+   <li><b>Direct trade</b>We pay farmers 30% above fair trade prices.</li>
+   <li><b>Roasted weekly</b>Every bag carries its roast date.</li>
+   <li><b>Milk from nearby</b>Whole milk from a dairy 40 km away.</li>
+  </ul>
+ </div></section>
+ <section id="menu" class="milk"><div class="wrap two">
+  <div>
+   <h2>Today’s menu</h2>
+   <p>Every drink is made to order. Ask us to swap any milk for oat at no extra cost.</p>
+  </div>
+  <div class="card">
+   <div class="tabs" role="group" aria-label="Menu category">
+    <button data-t="hot" aria-pressed="true">Hot</button><button data-t="cold" aria-pressed="false">Cold</button><button data-t="bites" aria-pressed="false">Bites</button>
+   </div>
+   <ul class="menu" id="menuList"></ul>
+  </div>
+ </div></section>
+ <section id="roast" class="solid"><div class="wrap two">
+  <div>
+   <h2>Pick your roast</h2>
+   <p>We roast three profiles each week. Lighter roasts keep fruit and floral notes. Darker roasts bring cocoa and caramel.</p>
+  </div>
+  <div class="card">
+   <div class="roasts" role="group" aria-label="Roast level">
+    <button data-r="0" aria-pressed="false">Light</button><button data-r="1" aria-pressed="true">Medium</button><button data-r="2" aria-pressed="false">Dark</button>
+   </div>
+   <div class="swatch" id="swatch"></div>
+   <p id="notes" aria-live="polite"></p>
+  </div>
+ </div></section>
+
+ <section id="origins" class="milk">
+  <div class="wrap">
+   <h2>Where our beans grow</h2>
+   <p>Four of the farms behind this season’s bags.</p>
+   <div class="grid">
+    <div class="origin"><i style="background:#c9a77c"></i><h3>Ethiopia, Guji</h3><p>Blueberry, jasmine and honey.</p><small>2,100 m, washed</small></div>
+    <div class="origin"><i style="background:#a2673a"></i><h3>Colombia, Huila</h3><p>Red apple, caramel and cocoa.</p><small>1,750 m, honey process</small></div>
+    <div class="origin"><i style="background:#7a4a2b"></i><h3>Kenya, Nyeri</h3><p>Blackcurrant and brown sugar.</p><small>1,800 m, washed</small></div>
+    <div class="origin"><i style="background:#4e2e1c"></i><h3>Brazil, Cerrado</h3><p>Hazelnut and dark chocolate.</p><small>1,100 m, natural</small></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="process" class="dark">
+  <div class="wrap">
+   <h2>From bean to cup in four steps</h2>
+   <div class="grid">
+    <div class="step"><em>1</em><h3>Source</h3><p>We visit each farm and pick lots by cupping score.</p></div>
+    <div class="step"><em>2</em><h3>Roast</h3><p>Each lot roasts for 9 to 12 minutes in a 12 kg drum.</p></div>
+    <div class="step"><em>3</em><h3>Grind</h3><p>We grind to order, so aroma stays in the cup.</p></div>
+    <div class="step"><em>4</em><h3>Pour</h3><p>Water at 93°C, a 28 second shot, milk steamed to 60°C.</p></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="reviews" class="solid">
+  <div class="wrap">
+   <h2>What regulars say</h2>
+   <div class="grid">
+    <blockquote>The flat white is the smoothest I have had in the city. I come every morning.<cite>Ada, designer</cite></blockquote>
+    <blockquote>The Kenya pour over tastes like blackcurrant. The staff explain every bean.<cite>Tunde, engineer</cite></blockquote>
+    <blockquote>My bean club bag arrives fresh each week. I never run out.<cite>Maya, teacher</cite></blockquote>
+   </div>
+  </div>
+ </section>
+
+ <section id="club" class="milk">
+  <div class="wrap">
+   <h2>The bean club</h2>
+   <p>Fresh roasted bags delivered to your door. Pause or cancel any time.</p>
+   <div class="grid">
+    <div class="plan"><h3>Monthly</h3><div class="price">$16</div><p>One 250 g bag, picked by our roaster.</p><a class="btn" href="#visit">Choose monthly</a></div>
+    <div class="plan pick"><h3>Fortnightly</h3><div class="price">$30</div><p>Two 250 g bags each month with a tasting card.</p><a class="btn" href="#visit">Choose fortnightly</a></div>
+    <div class="plan"><h3>Weekly</h3><div class="price">$56</div><p>Four 250 g bags a month. Free shipping.</p><a class="btn" href="#visit">Choose weekly</a></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="visit" class="solid">
+  <div class="wrap two">
+   <div>
+    <h2>Come by for a cup</h2>
+    <dl class="hours"><dt>Mon to Fri</dt><dd>7:00 am to 6:00 pm</dd><dt>Saturday</dt><dd>8:00 am to 5:00 pm</dd><dt>Sunday</dt><dd>8:00 am to 2:00 pm</dd></dl>
+    <p>14 Harbour Road. Walk-ins welcome. Order ahead for pickup in under 5 minutes.</p>
+   </div>
+   <div>
+    <h2>Get the monthly roast note</h2>
+    <p>One short email on new beans, brewing tips and events.</p>
+    <div class="news"><input id="email" type="email" placeholder="you@example.com" aria-label="Email address"><button class="btn main" id="join">Subscribe</button></div>
+    <p id="msg" aria-live="polite"></p>
+   </div>
+  </div>
+ </section>
+</main>
+<footer>© 2026 Kettle &amp; Cherry Coffee. Roasted in small batches.</footer>
+
+<script>
+(function(){
+var menus={
+ hot:[['Espresso','Double shot, 18 g dose','$3.00'],['Flat white','Espresso with steamed whole milk','$4.50'],['Cortado','Equal parts espresso and milk','$4.00'],['Pour over','Single origin, brewed to order','$5.50'],['Cardamom latte','House spice syrup','$5.50']],
+ cold:[['Cold brew','Steeped for 18 hours','$5.00'],['Iced latte','Double shot over milk and ice','$5.00'],['Coffee tonic','Espresso, tonic and orange peel','$5.50'],['Brown sugar shaken','Espresso, oat milk, brown sugar','$5.50']],
+ bites:[['Butter croissant','Baked every morning','$3.50'],['Banana bread','Brown butter and walnut','$3.50'],['Almond cookie','Baked with sea salt','$2.80'],['Egg and cheese roll','Free range eggs','$6.00']]
+};
+var list=document.getElementById('menuList');
+function show(k){list.innerHTML='';menus[k].forEach(function(r){var li=document.createElement('li');li.innerHTML='<div><b>'+r[0]+'</b><small>'+r[1]+'</small></div><span>'+r[2]+'</span>';list.appendChild(li);});}
+show('hot');
+var tb=document.querySelectorAll('.tabs button');
+tb.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t);tb.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});});});
+document.getElementById('join').addEventListener('click',function(){
+ var v=document.getElementById('email').value.trim(),m=document.getElementById('msg');
+ m.textContent=/^\S+@\S+\.\S+$/.test(v)?'You’re on the list. Watch your inbox for the next roast note.':'Enter a valid email address.';
+});
+
+var roasts=[
+ {c:'#9a6a3f',n:'Light roast: jasmine, stone fruit and a clean, tea-like finish.'},
+ {c:'#6b4226',n:'Medium roast: milk chocolate, toasted almond and soft caramel.'},
+ {c:'#2c1a10',n:'Dark roast: dark cocoa, molasses and a long, smoky body.'}
+];
+var notes=document.getElementById('notes'),sw=document.getElementById('swatch');
+notes.textContent=roasts[1].n;sw.style.background=roasts[1].c;
+var rb=document.querySelectorAll('.roasts button');
+rb.forEach(function(btn){btn.addEventListener('click',function(){
+ var r=roasts[+btn.dataset.r];notes.textContent=r.n;sw.style.background=r.c;
+ rb.forEach(function(o){o.setAttribute('aria-pressed',o===btn?'true':'false');});
+});});
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var cv=document.getElementById('cup');if(!cv||!window.THREE)return;
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var rd;try{rd=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});}catch(e){cv.style.display='none';return;}
+rd.setPixelRatio(Math.min(window.devicePixelRatio||1,2));rd.outputEncoding=THREE.sRGBEncoding;
+var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,0.1,50);
+cam.position.set(0,3.9,8.2);cam.lookAt(0,0.6,0);
+sc.add(new THREE.HemisphereLight(0xfff6ea,0xa88a6c,0.95));
+var k=new THREE.DirectionalLight(0xffffff,1.2);k.position.set(4,8,5);sc.add(k);
+var f=new THREE.DirectionalLight(0xffe6c8,0.5);f.position.set(-5,3,-2);sc.add(f);
+var V=THREE.Vector2,rig=new THREE.Group();sc.add(rig);
+var cream=new THREE.MeshPhysicalMaterial({color:0xfbf5ea,roughness:0.35,clearcoat:0.8,clearcoatRoughness:0.2,side:THREE.DoubleSide});
+function lathe(p){var pts=new THREE.SplineCurve(p.map(function(a){return new V(a[0],a[1]);})).getPoints(90);return new THREE.LatheGeometry(pts,72);}
+var saucer=new THREE.Mesh(lathe([[0.001,0],[1.0,0],[1.08,0.04],[1.6,0.13],[2.0,0.22],[2.1,0.3],[2.04,0.31],[1.98,0.25],[1.6,0.17],[1.1,0.1],[0.001,0.09]]),cream);
+rig.add(saucer);
+var cupG=new THREE.Group();cupG.position.y=0.1;rig.add(cupG);
+cupG.add(new THREE.Mesh(lathe([[0.001,0.02],[0.4,0],[0.44,0.05],[0.56,0.12],[0.8,0.36],[0.95,0.72],[1.02,1.05],[1.05,1.22],[1.0,1.25],[0.97,1.2],[0.94,1.05],[0.86,0.72],[0.68,0.38],[0.42,0.22],[0.001,0.2]]),cream));
+var curve=new THREE.CatmullRomCurve3([[0.97,0.98],[1.35,1.04],[1.62,0.8],[1.55,0.46],[0.78,0.42]].map(function(p){return new THREE.Vector3(p[0],p[1],0);}));
+var handle=new THREE.Mesh(new THREE.TubeGeometry(curve,48,0.075,14,false),cream);handle.scale.z=1.25;cupG.add(handle);
+function art(t){
+ var c=document.createElement('canvas');c.width=c.height=512;var x=c.getContext('2d');
+ var g=x.createRadialGradient(256,256,10,256,256,256);
+ if(t==='espresso'){g.addColorStop(0,'#c08a52');g.addColorStop(0.7,'#8a5530');g.addColorStop(1,'#4a2a14');}
+ else if(t==='black'){g.addColorStop(0,'#2a1509');g.addColorStop(1,'#120803');}
+ else{g.addColorStop(0,'#8a5a36');g.addColorStop(0.8,'#6b4125');g.addColorStop(1,'#3d2312');}
+ x.fillStyle=g;x.fillRect(0,0,512,512);
+ x.fillStyle='#f3e4cc';x.shadowColor='#f3e4cc';x.shadowBlur=12;
+ if(t==='flat'){x.beginPath();x.moveTo(256,410);x.bezierCurveTo(80,290,120,120,256,215);x.bezierCurveTo(392,120,432,290,256,410);x.fill();}
+ if(t==='cap'){for(var i=0;i<6;i++){x.beginPath();x.ellipse(256,385-i*46,150-i*19,27,0,0,Math.PI*2);x.fill();}x.shadowBlur=0;x.strokeStyle='#6b4125';x.lineWidth=5;x.beginPath();x.moveTo(256,130);x.lineTo(256,420);x.stroke();}
+ x.shadowBlur=0;
+ if(t==='espresso'){for(var n=0;n<500;n++){x.fillStyle=n%2?'rgba(224,170,110,.35)':'rgba(60,30,14,.3)';x.beginPath();x.arc(256+(Math.random()-.5)*420,256+(Math.random()-.5)*420,Math.random()*4+1,0,7);x.fill();}}
+ if(t==='black'){x.fillStyle='rgba(255,255,255,.07)';x.beginPath();x.ellipse(190,190,120,60,-0.7,0,7);x.fill();}
+ var tx=new THREE.CanvasTexture(c);tx.encoding=THREE.sRGBEncoding;tx.anisotropy=4;return tx;
+}
+var tex={},keys=['flat','espresso','cap','black'];keys.forEach(function(d){tex[d]=art(d);});
+var surface=new THREE.MeshStandardMaterial({map:tex.flat,roughness:0.3});
+var cof=new THREE.Mesh(new THREE.CircleGeometry(0.93,72),surface);cof.rotation.x=-Math.PI/2;cof.position.y=1.0;cupG.add(cof);
+var sh=document.createElement('canvas');sh.width=sh.height=64;var sx=sh.getContext('2d'),sg=sx.createRadialGradient(32,32,8,32,32,32);
+sg.addColorStop(0,'rgba(59,35,21,.4)');sg.addColorStop(1,'rgba(59,35,21,0)');sx.fillStyle=sg;sx.fillRect(0,0,64,64);
+var shadow=new THREE.Mesh(new THREE.PlaneGeometry(6.4,6.4),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sh),transparent:true,depthWrite:false}));
+shadow.rotation.x=-Math.PI/2;shadow.position.y=-0.01;rig.add(shadow);
+
+var info={flat:['Flat white. A double shot with silky microfoam in a 160 ml cup.',1],espresso:['Espresso. A 30 ml double shot with a thick golden crema.',0.74],cap:['Cappuccino. Equal parts espresso, milk and foam in a 180 ml cup.',1.08],black:['Black coffee. Filter brewed, clean and served without milk.',1]};
+var note=document.getElementById('dnote'),target=1,sNow=1;note.textContent=info.flat[0];
+var bt=document.querySelectorAll('#drinks button');
+bt.forEach(function(b){b.addEventListener('click',function(){var d=b.dataset.d;surface.map=tex[d];surface.needsUpdate=true;surface.roughness=d==='espresso'?0.5:0.3;note.textContent=info[d][0];target=info[d][1];bt.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});});});
+
+var ry=-0.5,drag=false,lx=0,idle=0;
+cv.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',function(e){if(drag){ry+=(e.clientX-lx)*0.01;lx=e.clientX;idle=0;}});
+['pointerup','pointercancel'].forEach(function(n){cv.addEventListener(n,function(){drag=false;});});
+function size(){var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;rd.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+window.addEventListener('resize',size);size();
+var last=performance.now();
+(function loop(now){
+ var dt=Math.min((now-last)/1000,0.05);last=now;
+ if(!drag){idle+=dt;if(!reduce&&idle>1.5)ry+=dt*0.25;}
+ sNow+=(target-sNow)*0.12;rig.scale.setScalar(sNow);rig.rotation.y=ry;
+ if(cv.clientWidth!==rd.domElement.width/rd.getPixelRatio()&&cv.clientWidth)size();
+ rd.render(sc,cam);requestAnimationFrame(loop);
+})(last);
+})();
+</script>
+</body>
+</html>
